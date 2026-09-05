@@ -1,0 +1,26 @@
+.category-page-content {
+  justify-content: center;
+}
+
+.category-posts-column {
+  flex: 0 0 70%;
+  max-width: 800px;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  font-size: 14px;
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+.category-heading {
+  font-size: 28px;
+  color: #222;
+  margin: 0 0 24px;
+}
