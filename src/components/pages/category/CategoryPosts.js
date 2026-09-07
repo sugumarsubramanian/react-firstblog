@@ -2,13 +2,16 @@ import { Link, useParams } from 'react-router-dom';
 import Post from '../post/post';
 // import '../postlist/PostList.css';
 import './CategoryPosts.css';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+// import { useEffect, useState } from 'react';
+// import axios from 'axios';
+import { useGetPostsByCategoryQuery } from '../../../redux/api/postapi';
+
 
 export default function CategoryPosts() {
-    const [posts, setPosts] = useState([]);
+    // const [posts, setPosts] = useState([]);
     // const [category, setCategory] = useState(null);
     const { id } = useParams()
+    const { data: posts = [] } = useGetPostsByCategoryQuery(id);
 
     
 	// const fetchCategory = async () => {
@@ -17,14 +20,14 @@ export default function CategoryPosts() {
         // }
         
         
-    useEffect(() => {
-        const fetchPosts = async () => {
-            const response = await axios.get(`http://localhost:5000/api/posts/category/${id}`)
-            setPosts(response.data);
-        }
-        fetchPosts();
-		// fetchCategory();
-    }, [id]);
+    // useEffect(() => {
+    //     const fetchPosts = async () => {
+    //         const response = await axios.get(`http://localhost:5000/api/posts/category/${id}`)
+    //         setPosts(response.data);
+    //     }
+    //     fetchPosts();
+	// 	// fetchCategory();
+    // }, [id]);
 
     // if (!category) {
     //     return <p>Loading...</p>

@@ -1,38 +1,40 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import axios from 'axios';
+// import axios from 'axios';
 // import './PostDetails.css';
+import { useGetPostByIdQuery } from '../../../redux/api/postapi';
 
 function PostDetails() {
     const { id } = useParams();
-    const [post, setPost] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    // const [post, setPost] = useState(null);
+    const { data: post, isLoading, isError } = useGetPostByIdQuery(id);
+    // const [loading, setLoading] = useState(true);
+    // const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchPost = async () => {
-            try {
-                setLoading(true);
-                const response = await axios.get(`http://localhost:5000/api/posts/${id}`);
-                setPost(response.data);
-                setError(null);
-            } catch (err) {
-                setError('Post not found.');
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchPost();
-    }, [id]);
+    // useEffect(() => {
+    //     const fetchPost = async () => {
+    //         try {
+    //             setLoading(true);
+    //             const response = await axios.get(`http://localhost:5000/api/posts/${id}`);
+    //             setPost(response.data);
+    //             setError(null);
+    //         } catch (err) {
+    //             setError('Post not found.');
+    //         } finally {
+    //             setLoading(false);
+    //         }
+    //     };
+    //     fetchPost();
+    // }, [id]);
 
-    if (loading) {
+    if (isLoading) {
         return <div className="post-details-page"><p>Loading...</p></div>;
     }
 
-    if (error || !post) {
+    if (isError || !post) {
         return (
             <div className="post-details-page">
-                <p>{error || 'Post not found.'}</p>
+                <p>Post not found.</p>
                 <Link to="/" className="back-link">&larr; Back to posts</Link>
             </div>
         );
